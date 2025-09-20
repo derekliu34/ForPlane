@@ -1,12 +1,12 @@
 config = {
     'description': 'iter9k',
 
-    'expname': 'endo_cutting_9k',
-    'logdir': './exps/endonerf_9k',
+    'expname': 'endo_mono',
+    'logdir': './exps/endo_mono',
     'device': 'cuda:0',
 
     'data_downsample': 1.0,
-    'data_dirs': ['data/endonerf_full_datasets/cutting_tissues_twice'],
+    'data_dirs': ['C:\Derek\ForPlane\data\endonerf_full_datasets\pulling_soft_tissues2'],
     'contract': False,
     'ndc': True,
     'ndc_far': 1.2,
@@ -19,7 +19,7 @@ config = {
     'frequency_ratio': 1,
     'near_scaling': 0.95,
     'bg_color': 0,
-    'depth_type': 'gt_depth',
+    'depth_type': 'mono_depth',
     # Optimization settings
     'num_steps': 1200,
     'batch_size': 32768//2,
@@ -37,16 +37,16 @@ config = {
     # 'distortion_loss_weight': 0.00
     'distortion_loss_weight': 0.0,
     'histogram_loss_weight': 1.0,
-    'mono_depth_weight': 0, 
-    'mono_depth_weight_proposal_net': 0, 
+    'mono_depth_weight': 1.0, 
+    'mono_depth_weight_proposal_net': 1.0, 
     'l1_time_planes': 0.0001,
     'l1_time_planes_proposal_net': 0.0001,
     'plane_tv_weight': 0.0001,
     'plane_tv_weight_proposal_net': 0.0001,
     'time_smoothness_weight': 0.03,
     'time_smoothness_weight_proposal_net': 0.0001,
-    'depth_huber_weight': 1.0,
-    'depth_huber_weight_proposal_net': 1.0,
+    'depth_huber_weight': 0.0,
+    'depth_huber_weight_proposal_net': 0.0,
     'step_iter': 900*3,
 
     # Training settings, since we valid after train, just disable valid

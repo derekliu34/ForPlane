@@ -6,8 +6,9 @@ import logging as log
 
 import torch
 import torch.nn as nn
+import sys
+sys.path.append("C:\\Derek\\ForPlane\\tiny-cuda-nn")
 import tinycudann as tcnn
-
 from forplanes.models.lerplane_field import interpolate_ms_features, normalize_aabb, init_grid_param
 from forplanes.raymarching.spatial_distortions import SpatialDistortion
 

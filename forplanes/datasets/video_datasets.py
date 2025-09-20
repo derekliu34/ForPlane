@@ -83,6 +83,7 @@ class VideoEndoDataset(BaseDataset):
         png_cnt = 0
         str_cnt = '/000000.png'
 
+        #os.path doesn't exist here, paths not being appended properly
         while os.path.exists(datadir + "/images" + str_cnt):
             paths_img.append(datadir + "/images" + str_cnt)
             paths_mask.append(datadir + "/gt_masks" + str_cnt)
@@ -145,11 +146,11 @@ class VideoEndoDataset(BaseDataset):
                 imgs = imgs[1::2]
                 depths = depths[1::2]
                 masks = masks[1::2]
-        else:
+        elif ('DISE' in datadir) == False:
             imgs = [i[:500, :, :] for i in imgs]
             masks = [i[:500, :, :] for i in masks]
             depths = [i[:500, :, :] for i in depths]
-            intrinsics.height = 500 # this is a fix for the endo dataset
+            intrinsics.height = 500 # this is a fix for the endo dataset MAYBE AN ISSUE HERE?????*********
             intrinsics.center_y = intrinsics.center_y - 6
             
 
@@ -191,9 +192,12 @@ class VideoEndoDataset(BaseDataset):
             -1, intrinsics.height, intrinsics.width)
         freq = (1 - self.mask_weights).sum(0)
         self.p = freq / torch.sqrt((torch.pow(freq, 2)).sum())
+        if "DISE" in datadir:
+            self.p = torch.zeros_like(self.p) #need to check the output, make sure it's not the opposite
         self.mask_weights = self.mask_weights * (1.0 + self.p * self.p_ratio)
         self.mask_weights = self.mask_weights.reshape(
             -1) / torch.sum(self.mask_weights)
+            
         # self.global_translation = torch.tensor([0, 0, 2.])
         # self.global_scale = torch.tensor([0.5, 0.6, 1])
         # Normalize timestamps between -1, 1

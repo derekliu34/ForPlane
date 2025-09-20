@@ -12,6 +12,13 @@ import numpy as np
 import torch
 import torch.utils.data
 
+sys.path.append("C:\\Derek\\ForPlane\\")
+#os.chdir(r"C:\Derek\ForPlane\forplanes")
+
+#cwd = os.getcwd()
+#print(cwd)
+
+
 from forplanes.runners import video_trainer
 from forplanes.utils.create_rendering import render_speed, render_to_path
 from forplanes.utils.parse_args import parse_optfloat

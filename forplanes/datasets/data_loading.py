@@ -1,7 +1,6 @@
 from typing import Tuple, Optional, Dict, Any, List
 import logging as log
 import os
-import resource
 from functools import partial
 import torch
 # from torch.multiprocessing import Pool
@@ -16,8 +15,8 @@ from forplanes.utils.my_tqdm import tqdm
 
 pil2tensor = torchvision.transforms.ToTensor()
 # increase ulimit -n (number of open files) otherwise parallel loading might fail
-rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
-resource.setrlimit(resource.RLIMIT_NOFILE, (32768, rlimit[1]))
+#rlimit = resource.getrlimit(resource.RLIMIT_NOFILE)
+#resource.setrlimit(resource.RLIMIT_NOFILE, (32768, rlimit[1]))
 
 maxT = 4
 
@@ -181,6 +180,7 @@ def _parallel_loader_endo_depth_image(args):
 
 
 def parallel_load_images_wrappers(max_threads, num_images, fn, tqdm_title, **kwargs):
+    print(f"max_threads: {max_threads}, num_images: {num_images}")
     p = Pool(min(max_threads, num_images))
     iterator = p.imap(fn, [{"idx": i, **kwargs} for i in range(num_images)])
     outputs = []
