@@ -1,0 +1,15 @@
+Forplane usage:
+
+ python forplanes/main.py --config-path forplanes/config/example-9k.py
+
+ python forplanes/main.py --config-path forplanes/config/DISE.py
+
+python tools\forplane_reconstruction.py --input_path "C:\\Derek\\ForPlane\\exps\\endonerf_9k\\endo_cutting_9k\\estm\\rgb" --n_frames "63"
+
+python tools\forplane_reconstruction.py --input_path "C:\Derek\ForPlane\exps\endonerf_9k_mono\endo_cutting_9k_mono\estm\depth" --n_frames "63"
+
+python tools\forplane_reconstruction.py --input_path "C:\Derek\ForPlane\exps\DISE_endo\DISE\estm\rgb" --n_frames "96"
+
+python tools\vis_points.py --pc_dir "C:\Derek\ForPlane\exps\endonerf_9k\endo_cutting_9k\pcds"
+
+python tools\vis_points.py --pc_dir "C:\Derek\ForPlane\exps\endonerf_9k_mono\endo_cutting_9k_mono\pcds"
